@@ -94,3 +94,74 @@ let position = () => {
 
 		return randPosition;
 	};
+
+//begin shape generation and start the next round
+let start = () => {
+	//show timer
+	$('#timerContainer').css('display', "block");
+	//start function to generate id names
+	makeid();
+	//start function to pick direction shapes come from
+	position();
+	//create empty div element
+	let div = document.createElement('div');
+	//positions shapes based on direction spawned
+	if (position() == 1) {
+		$(div).css('top', "-150px");
+		$(div).css('left', Math.floor((Math.random() * screen.width) + 1));
+	}
+	else if (position() == 2) {
+		$(div).css('right', "-150px");
+		$(div).css('top', Math.floor((Math.random() * screen.height) + 1));
+	}
+	else if (position() == 3) {
+		$(div).css('bottom', "-150px");
+		$(div).css('left', Math.floor((Math.random() * screen.width) + 1));
+	}
+	else if (position() == 4) {
+		$(div).css('left', "-150px");
+		$(div).css('top', Math.floor((Math.random() * screen.height) + 1));
+	}
+	else {
+		return;
+	}
+	//picks a random value between 1 and 100
+	let randValue = Math.floor((Math.random() * 100) + 1);
+	//assigns IDs matched to specific colors based on weighted rolls from randValue
+	if (randValue <= 60) {
+		document.getElementById('hideOverflow').appendChild(div);
+		$(div).addClass('redrectangle');
+		div.id = "red"+makeid();
+	}
+	else if (randValue <= 80 && randValue >=61) {
+		document.getElementById('hideOverflow').appendChild(div);
+		$(div).addClass('greendiamond');
+		div.id = "green"+makeid();
+	}
+	else if (randValue <= 92 && randValue >=81) {
+		document.getElementById('hideOverflow').appendChild(div);
+		$(div).addClass('yellowcircle');
+		div.id = "yellow"+makeid();
+	}
+	else if (randValue <= 100 && randValue >=93) {
+		document.getElementById('hideOverflow').appendChild(div);
+		$(div).addClass('blueparallelogram');
+		div.id = "blue"+makeid();
+	}
+	//sets animation towards center
+	$(div).animate({
+		'top': ((window.innerHeight / 2) - ($(div).outerHeight() / 2)) + 'px', 'left': ((window.innerWidth / 2) - ($(div).outerWidth() / 2)) + 'px',
+	}, 15000 - (curRound * 1000));
+	//subtracts life when entering shape enters center
+	$(div).promise().done(function(){
+		$(div).remove();
+		curLife--;
+		if (curLife < 1) {
+			curLife = 0;
+			gameOver();
+		}
+		lifeColor();
+		$('#start-button').css('background-color', lifeColor());
+		$('#lifeCounter').html(curLife);
+	});
+}
