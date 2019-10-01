@@ -188,6 +188,41 @@ table {
 	text-decoration: underline;
 }
 
+.redrectangle {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	}
+
+.greendiamond {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background-color: green;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+
+.yellowcircle {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	background-color: yellow;
+	border-radius: 100%;
+}
+
+.blueparallelogram {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	-webkit-transform: skew(20deg);
+	-moz-transform: skew(20deg);
+	-o-transform: skew(20deg);
+	background-color: blue;
+}
+
 /*MOBILE*//*MOBILE*//*MOBILE*/
 
 @media only screen
@@ -249,5 +284,25 @@ and (max-device-width: 667px)
 
 	#scoreText {
 		font-size: 12px;
+	}
+
+	.redrectangle {
+		width: 35px;
+		height: 35px;
+	}
+
+	.greendiamond {
+		width: 40px;
+		height: 40px;
+	}
+
+	.yellowcircle {
+		width: 45px;
+		height: 45px;
+	}
+
+	.blueparallelogram {
+		width: 50px;
+		height: 50px;
 	}
 }
