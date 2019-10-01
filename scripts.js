@@ -19,9 +19,7 @@ let gameOver = () => {
 	localStorage.setItem('score', 0);
 	localStorage.setItem('round', 1);
 	//hide UI elements
-	$('#timerContainer').css('display', 'none');
-	$('#scoreContainer').css('display', 'none');
-	$('#roundContainer').css('display', 'none');
+	$('#timerContainer', '#scoreContainer', '#roundContainer').css('display', 'none');
 	$('#tutorialContainer').css('display','inline-flex');
 }
 
@@ -180,14 +178,11 @@ $('#start-button').on('click touch', function() {
 		//starts timer for the current round
 		timer();
 		//hide tutorial text, and the start button
-		$('#tutorialContainer').css('display','none');
-		$('.fa-play').css('display', "none");
+		$('#tutorialContainer', '.fa-play').css('display','none');
 		//sets start button background color
 		$('#start-button').css('background-color', 'hsl(104.5, 80%, 40%)')
 		//show the life, score, and round numbers
-		$('#lifeCounter').css('display', "block");
-		$('#scoreContainer').css('display', "block");
-		$('#roundContainer').css('display', "block");
+		$('#lifeCounter', '#scoreContainer', '#roundContainer').css('display', "block");
 		$('#lifeCounter').html(curLife);
 	}	
 });
