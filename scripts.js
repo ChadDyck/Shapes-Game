@@ -189,3 +189,20 @@ $('#start-button').on('click touch', function() {
 		$('#lifeCounter').html(curLife);
 	}	
 });
+
+let shapeID;
+let score = localStorage.getItem('score');
+let s = localStorage.getItem('score' * 10);
+//shrink shapes when clicked/tapped
+$('body').on('click touchstart touchmove', ('div[id^="red"], div[id^="green"], div[id^="yellow"], div[id^="blue"]'), function() {
+	shapeID = $(this);
+	s += parseInt(curRound * 3);
+	score = parseInt(s / 10);
+	$('#scoreCount').html(score);
+	$(shapeID).css('width', "-=10px");
+	$(shapeID).css('height', "-=10px");
+	let size = $(shapeID).css('width');
+	if (size < "30px") {
+		$(shapeID).remove();
+	}
+});
