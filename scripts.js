@@ -87,3 +87,10 @@ let makeid = () => {
 		return text;
 	}
 }
+
+//sets direction generated elements will spawn
+let position = () => {
+		var randPosition = Math.floor((Math.random() * 4) + 1);
+
+		return randPosition;
+	};
