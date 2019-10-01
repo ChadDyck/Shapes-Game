@@ -165,3 +165,29 @@ let start = () => {
 		$('#lifeCounter').html(curLife);
 	});
 }
+
+let started;
+let maxLife = 20;
+let curLife;
+//when start button is clicked, begin the game
+$('#start-button').on('click touch', function() {
+	//if the game hasn't been started, set the current life to maximum, and then start
+	if (started != 1) {
+		curLife = maxLife;
+		started = 1;
+		//starts shape generation for the current round
+		start();
+		//starts timer for the current round
+		timer();
+		//hide tutorial text, and the start button
+		$('#tutorialContainer').css('display','none');
+		$('.fa-play').css('display', "none");
+		//sets start button background color
+		$('#start-button').css('background-color', 'hsl(104.5, 80%, 40%)')
+		//show the life, score, and round numbers
+		$('#lifeCounter').css('display', "block");
+		$('#scoreContainer').css('display', "block");
+		$('#roundContainer').css('display', "block");
+		$('#lifeCounter').html(curLife);
+	}	
+});
