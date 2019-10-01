@@ -69,9 +69,9 @@ let timer = () => {
 
 //change color of centre circle as life value lowers
 let lifeColor = (percentage, hue0, hue1) => {
-	var hue0 = 0;
-		let hue1 = 110;
-		let percentage = (curLife / maxLife);
+		hue0 = 0;
+		hue1 = 110;
+		percentage = (curLife / maxLife);
     	let hue = (percentage * (hue1 - hue0)) + hue0;
 
     	return 'hsl(' + hue + ', 80%, 40%)';
