@@ -76,3 +76,14 @@ let lifeColor = (percentage, hue0, hue1) => {
 
     	return 'hsl(' + hue + ', 80%, 40%)';
 }
+
+let makeid = () => {
+	//set variables of empty text string, and a a string of possible characters available
+	let text = '';
+	let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	//create 7 character long string to later append to div names
+	for (var i = 0; i < 7; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+		return text;
+	}
+}
