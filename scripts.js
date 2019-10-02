@@ -21,7 +21,6 @@ let gameOver = () => {
 	//hide UI elements
 	$('#timerContainer', '#scoreContainer', '#roundContainer').css('display', 'none');
 	$('#tutorialContainer').css('display','inline-flex');
-	s = 0;
 	score = 0;
 	curRound = 1;
 }
