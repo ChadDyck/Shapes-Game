@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	//check for returning player
-	if (localStorage.getItem('visited') != true) {
+	if (localStorage.getItem('visited') != 'true') {
 		//set score and round number to default
 		localStorage.setItem('score', 0);
 		localStorage.setItem('round', 1);
@@ -29,7 +29,8 @@ let gameOver = () => {
 let curRound = 0;
 let timer = () => {
 	//set variables for the round and time remaining in the current round
-	let curRound = localStorage.getItem('round');
+	curRound = localStorage.getItem('round');
+	$('#roundNumber').html(curRound);
 	let timeLeft = 35 + (curRound * 5);
 	let roundTimer = setInterval(() => {
 		//function to start next round
@@ -39,8 +40,7 @@ let timer = () => {
 			timeLeft = 0;
 		}
 		//set div element text as round and score variables
-		$('#roundNumber').html(curRound);
-		$('#scoreCount').html(localStorage.getItem('score'));
+		$('#scoreCount').html(score);
 		//subtract 1 second from timer
 		timeLeft--;
 		//set div element text as time remaining
@@ -61,7 +61,7 @@ let timer = () => {
 				curRound++;
 			}
 			//set values for round and score, and set that the player has played before now that they have completed a round
-			localStorage.setItem('visited', true);
+			localStorage.setItem('visited', 'true');
 			localStorage.setItem('round', curRound);
 			localStorage.setItem('score', score);
 		}
@@ -153,16 +153,21 @@ let start = () => {
 	$(div).animate({
 		'top': ((window.innerHeight / 2) - ($(div).outerHeight() / 2)) + 'px', 'left': ((window.innerWidth / 2) - ($(div).outerWidth() / 2)) + 'px',
 	}, 15000 - (curRound * 1000));
-	//subtracts life when entering shape enters center
+	//subtracts life when shape enters center
 	$(div).promise().done(function(){
+		//delete shape
 		$(div).remove();
+		//subtract life
 		curLife--;
+		//if life hits 0, end the game and reset all values to default
 		if (curLife < 1) {
 			curLife = 0;
 			gameOver();
 		}
+		//update color of life circle
 		lifeColor();
 		$('#start-button').css('background-color', lifeColor());
+		//reset life count
 		$('#lifeCounter').html(curLife);
 	});
 }
@@ -191,17 +196,20 @@ $('#start-button').on('click touch', function() {
 });
 
 let shapeID;
-let score = localStorage.getItem('score');
-let s = localStorage.getItem('score' * 10);
-//shrink shapes when clicked/tapped
+let score = parseInt(localStorage.getItem('score'));
+//shrink shapes when clicked
 $('body').on('click touchstart touchmove', ('div[id^="red"], div[id^="green"], div[id^="yellow"], div[id^="blue"]'), function() {
+	//target this object
 	shapeID = $(this);
-	s += parseInt(curRound * 3);
-	score = parseInt(s / 10);
+	//calculate score increase on click
+	score += (curRound * 3);
+	//display updated score
 	$('#scoreCount').html(score);
+	//decrease shape size on click
 	$(shapeID).css('width', "-=10px");
 	$(shapeID).css('height', "-=10px");
 	let size = $(shapeID).css('width');
+	//if shape is smaller than 30px, delete shape
 	if (size < "30px") {
 		$(shapeID).remove();
 	}
