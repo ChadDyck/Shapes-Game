@@ -82,7 +82,7 @@ let makeid = () => {
 	let text = '';
 	let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	//create 7 character long string to later append to div names
-	for (var i = 0; i < 7; i++) {
+	for (let i = 0; i < 7; i++) {
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
 		return text;
 	}
@@ -90,7 +90,7 @@ let makeid = () => {
 
 //sets direction generated elements will spawn
 let position = () => {
-		var randPosition = Math.floor((Math.random() * 4) + 1);
+		let randPosition = Math.floor((Math.random() * 4) + 1);
 
 		return randPosition;
 	};
